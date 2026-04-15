@@ -1,5 +1,15 @@
 const request = require("supertest");
 const app = require("../src/app");
+const sequelize = require('../src/database/db');
+const Employee = require('../src/models/employee.model');
+
+beforeAll(async () => {
+  await sequelize.sync({ force: true });
+});
+
+beforeEach(async () => {
+  await Employee.destroy({ where: {} });
+});
 
 describe("Employee API", () => {
   it("should create an employee", async () => {
