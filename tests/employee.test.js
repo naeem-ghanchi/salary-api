@@ -107,4 +107,19 @@ describe("Employee API", () => {
 
     expect(res.statusCode).toBe(400);
   });
+
+  it("should fail if fullName already exists", async () => {
+    const payload = {
+      fullName: "Naeem",
+      jobTitle: "Dev",
+      country: "India",
+      salary: 50000,
+    };
+
+    await request(app).post("/employee").send(payload);
+
+    const res = await request(app).post("/employee").send(payload);
+
+    expect(res.statusCode).toBe(400);
+  });
 });
