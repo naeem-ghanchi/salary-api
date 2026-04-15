@@ -70,4 +70,10 @@ describe("Employee API", () => {
 
     expect(res.statusCode).toBe(200);
   });
+
+  it("should delete employee", async () => {
+    const res = await request(app).delete("/employee/1");
+
+    expect(res.statusCode).toBe(200);
+  });
 });
