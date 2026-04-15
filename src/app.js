@@ -27,6 +27,9 @@ app.get("/employee", (req, res) => {
 });
 
 app.get("/employee/:id", (req, res) => {
+  if (req.params.id !== "1") {
+    return res.status(404).json({ error: "Not found" });
+  }
   res.status(200).json({ id: req.params.id });
 });
 
