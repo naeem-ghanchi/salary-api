@@ -43,6 +43,11 @@ exports.getEmployeeById = async (req, res) => {
 exports.updateEmployee = async (req, res) => {
   try {
     const id = Number(req.params.id);
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
 
     const emp = await service.updateEmployee(id, req.body);
 
