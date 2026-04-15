@@ -1,41 +1,46 @@
-const request = require('supertest');
-const app = require('../src/app');
+const request = require("supertest");
+const app = require("../src/app");
 
-describe('Employee API', () => {
-  it('should create an employee', async () => {
-    const res = await request(app)
-      .post('/employee')
-      .send({
-        fullName: "Test User",
-        jobTitle: "Developer",
-        country: "India",
-        salary: 50000
-      });
+describe("Employee API", () => {
+  it("should create an employee", async () => {
+    const res = await request(app).post("/employee").send({
+      fullName: "Test User",
+      jobTitle: "Developer",
+      country: "India",
+      salary: 50000,
+    });
 
     expect(res.statusCode).toBe(201);
   });
 
-  it('should fail if fullName is missing', async () => {
-  const res = await request(app)
-    .post('/employee')
-    .send({
+  it("should fail if fullName is missing", async () => {
+    const res = await request(app).post("/employee").send({
       jobTitle: "Developer",
       country: "India",
-      salary: 50000
+      salary: 50000,
     });
 
     expect(res.statusCode).toBe(400);
   });
 
-  it('should fail if fullName, jobTitle, country, or salary is missing', async () => {
-  const res = await request(app)
-    .post('/employee')
-    .send({
+  it("should fail if fullName, jobTitle, country, or salary is missing", async () => {
+    const res = await request(app).post("/employee").send({
       fullName: "Test User",
       country: "India",
-      salary: 50000
+      salary: 50000,
     });
 
-  expect(res.statusCode).toBe(400);
-});
+    expect(res.statusCode).toBe(400);
+  });
+
+  it("should fail if salary is negative", async () => {
+    const res = await request(app).post("/employee").send({
+      fullName: "Naeem",
+      jobTitle: "Developer",
+      country: "India",
+      salary: -100,
+    });
+
+    expect(res.statusCode).toBe(400);
+  });
 });
