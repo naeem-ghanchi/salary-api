@@ -162,4 +162,9 @@ describe("Employee API", () => {
 
     expect(res.body.net).toBe(50000);
   });
+
+  it("should return 404 if employee not found", async () => {
+    const res = await request(app).get("/employee/999/salary");
+    expect(res.statusCode).toBe(404);
+  });
 });
