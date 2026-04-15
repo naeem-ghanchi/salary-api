@@ -19,7 +19,6 @@ describe('Employee API', () => {
   const res = await request(app)
     .post('/employee')
     .send({
-      fullName: "Test User",
       jobTitle: "Developer",
       country: "India",
       salary: 50000
@@ -32,6 +31,7 @@ describe('Employee API', () => {
   const res = await request(app)
     .post('/employee')
     .send({
+      fullName: "Test User",
       country: "India",
       salary: 50000
     });
