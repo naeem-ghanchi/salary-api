@@ -18,7 +18,13 @@ exports.createEmployee = async (req, res) => {
 };
 
 exports.getAllEmployees = async (req, res) => {
-  const data = await service.getAll();
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+
+  if (page <= 0 || limit <= 0) {
+    return res.status(400).json({ error: "Invalid pagination params" });
+  }
+  const data = await service.getAll({ page, limit });
   res.json(data);
 };
 

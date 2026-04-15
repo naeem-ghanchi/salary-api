@@ -3,7 +3,13 @@ const Employee = require("../models/employee.model");
 
 exports.create = (data) => Employee.create(data);
 
-exports.findAll = () => Employee.findAll();
+exports.findAll = ({ limit, offset }) => {
+  return Employee.findAndCountAll({
+    limit,
+    offset,
+    order: [["id", "DESC"]],
+  });
+};
 
 exports.findById = (id) => Employee.findByPk(id);
 

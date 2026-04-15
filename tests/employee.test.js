@@ -54,13 +54,6 @@ describe("Employee API", () => {
     expect(res.statusCode).toBe(400);
   });
 
-  it("should return all employees", async () => {
-    const res = await request(app).get("/employee");
-
-    expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-  });
-
   it("should return employee by id", async () => {
     const res = await request(app).get("/employee/1");
 

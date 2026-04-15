@@ -4,7 +4,21 @@ exports.createEmployee = async (data) => {
   return repo.create(data);
 };
 
-exports.getAll = () => repo.findAll();
+exports.getAll = async ({ page, limit }) => {
+  const offset = (page - 1) * limit;
+
+  const { rows, count } = await repo.findAll({ limit, offset });
+
+  return {
+    data: rows,
+    pagination: {
+      total: count,
+      page,
+      limit,
+      totalPages: Math.ceil(count / limit),
+    },
+  };
+};
 
 exports.getById = (id) => repo.findById(id);
 
