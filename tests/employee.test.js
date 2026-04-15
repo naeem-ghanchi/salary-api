@@ -136,4 +136,17 @@ describe("Employee API", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.net).toBe(45000);
   });
+
+  it("should calculate salary for US (12% deduction)", async () => {
+    const create = await request(app).post("/employee").send({
+      fullName: "John",
+      jobTitle: "Dev",
+      country: "United States",
+      salary: 100000,
+    });
+
+    const res = await request(app).get(`/employee/${create.body.id}/salary`);
+
+    expect(res.body.net).toBe(88000);
+  });
 });
