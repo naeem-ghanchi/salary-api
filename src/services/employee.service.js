@@ -16,13 +16,13 @@ exports.calculateSalary = async (id) => {
   const emp = await repo.findById(id);
   if (!emp) return null;
 
-  let deduction = 0;
+  const rules = {
+    India: 0.1,
+    "United States": 0.12,
+  };
 
-  if (emp.country === "India") {
-    deduction = emp.salary * 0.1;
-  } else if (emp.country === "United States") {
-    deduction = emp.salary * 0.12;
-  }
+  const rate = rules[emp.country] || 0;
+  const deduction = emp.salary * rate;
 
   return {
     gross: emp.salary,
