@@ -74,11 +74,19 @@ describe("Employee API", () => {
   });
 
   it("should update employee", async () => {
+    const create = await request(app).post("/employee").send({
+      fullName: "Old",
+      jobTitle: "Dev",
+      country: "India",
+      salary: 50000,
+    });
+
     const res = await request(app)
-      .put("/employee/1")
-      .send({ fullName: "Updated Name" });
+      .put(`/employee/${create.body.id}`)
+      .send({ fullName: "Updated" });
 
     expect(res.statusCode).toBe(200);
+    expect(res.body.fullName).toBe("Updated");
   });
 
   it("should delete employee", async () => {
