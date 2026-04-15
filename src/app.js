@@ -22,4 +22,7 @@ app.post("/employee", (req, res) => {
   res.status(201).json(req.body);
 });
 
+app.get("/employee", (req, res) => {
+  res.status(200).json([]);
+});
 module.exports = app;
