@@ -239,4 +239,9 @@ describe("Employee API", () => {
     expect(res.body.data.length).toBe(10);
     expect(res.body.pagination.total).toBe(15);
   });
+
+  it("should fail for invalid pagination params", async () => {
+    const res = await request(app).get("/employee?page=-1&limit=0");
+    expect(res.statusCode).toBe(400);
+  });
 });
