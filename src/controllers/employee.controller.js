@@ -70,3 +70,23 @@ exports.deleteEmployee = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.getSalary = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    if (isNaN(id)) {
+      return res.status(400).json({ error: "Invalid ID" });
+    }
+
+    const result = await service.calculateSalary(id);
+
+    if (!result) {
+      return res.status(404).json({ error: "Not found" });
+    }
+
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
