@@ -244,4 +244,11 @@ describe("Employee API", () => {
     const res = await request(app).get("/employee?page=-1&limit=0");
     expect(res.statusCode).toBe(400);
   });
+
+  it("should use default pagination if not provided", async () => {
+    const res = await request(app).get("/employee");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.pagination.page).toBe(1);
+  });
 });
