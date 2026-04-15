@@ -149,4 +149,17 @@ describe("Employee API", () => {
 
     expect(res.body.net).toBe(88000);
   });
+
+  it("should return full salary for other countries", async () => {
+    const create = await request(app).post("/employee").send({
+      fullName: "Ali",
+      jobTitle: "Dev",
+      country: "UAE",
+      salary: 50000,
+    });
+
+    const res = await request(app).get(`/employee/${create.body.id}/salary`);
+
+    expect(res.body.net).toBe(50000);
+  });
 });
