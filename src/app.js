@@ -4,6 +4,7 @@ const {
   getAllEmployees,
   getEmployeeById,
   updateEmployee,
+  deleteEmployee,
 } = require("./controllers/employee.controller");
 const app = express();
 
@@ -17,8 +18,6 @@ app.get("/employee/:id", getEmployeeById);
 
 app.put("/employee/:id", updateEmployee);
 
-app.delete("/employee/:id", (req, res) => {
-  res.status(200).json({ message: "Deleted" });
-});
+app.delete("/employee/:id", deleteEmployee);
 
 module.exports = app;

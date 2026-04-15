@@ -90,7 +90,14 @@ describe("Employee API", () => {
   });
 
   it("should delete employee", async () => {
-    const res = await request(app).delete("/employee/1");
+    const create = await request(app).post("/employee").send({
+      fullName: "Old",
+      jobTitle: "Dev",
+      country: "India",
+      salary: 50000,
+    });
+
+    const res = await request(app).delete(`/employee/${create.body.id}`);
 
     expect(res.statusCode).toBe(200);
   });
