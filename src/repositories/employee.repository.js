@@ -34,3 +34,14 @@ exports.getCountryMetrics = async (country) => {
     raw: true,
   });
 };
+
+exports.getJobMetrics = async (jobTitle) => {
+  return Employee.findOne({
+    attributes: [
+      [fn("AVG", col("salary")), "avg"],
+      [fn("COUNT", col("id")), "count"],
+    ],
+    where: { jobTitle },
+    raw: true,
+  });
+};

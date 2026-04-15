@@ -11,3 +11,13 @@ exports.getCountryMetrics = async (country) => {
     avg: Number(result.avg),
   };
 };
+
+exports.getJobMetrics = async (jobTitle) => {
+  const result = await repo.getJobMetrics(jobTitle);
+
+  if (!result || !result.count) return null;
+
+  return {
+    avg: Number(result.avg),
+  };
+};
