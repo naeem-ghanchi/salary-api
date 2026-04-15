@@ -76,4 +76,10 @@ describe("Employee API", () => {
 
     expect(res.statusCode).toBe(200);
   });
+
+  it('should fail for invalid id format', async () => {
+  const res = await request(app).get('/employee/abc');
+
+  expect(res.statusCode).toBe(400);
+});
 });
