@@ -27,7 +27,13 @@ exports.getEmployeeById = async (req, res) => {
   try {
     const id = Number(req.params.id);
 
+    if (isNaN(id)) {
+      return res.status(400).json({ error: "Invalid ID" });
+    }
     const emp = await service.getById(id);
+    if (!emp) {
+      return res.status(404).json({ error: "Not found" });
+    }
     return res.status(200).json(emp);
   } catch (err) {
     return res.status(500).json({ error: "Internal Server Error" });

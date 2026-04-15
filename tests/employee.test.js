@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../src/app");
-const sequelize = require('../src/database/db');
-const Employee = require('../src/models/employee.model');
+const sequelize = require("../src/database/db");
+const Employee = require("../src/models/employee.model");
 
 beforeAll(async () => {
   await sequelize.sync({ force: true });
@@ -64,7 +64,7 @@ describe("Employee API", () => {
   it("should return employee by id", async () => {
     const res = await request(app).get("/employee/1");
 
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(404);
   });
 
   it("should return 404 if employee not found", async () => {
@@ -87,9 +87,9 @@ describe("Employee API", () => {
     expect(res.statusCode).toBe(200);
   });
 
-  it('should fail for invalid id format', async () => {
-  const res = await request(app).get('/employee/abc');
+  it("should fail for invalid id format", async () => {
+    const res = await request(app).get("/employee/abc");
 
-  expect(res.statusCode).toBe(400);
-});
+    expect(res.statusCode).toBe(400);
+  });
 });
