@@ -1,14 +1,12 @@
 const express = require("express");
-const { createEmployee } = require("./controllers/employee.controller");
+const { createEmployee, getAllEmployees } = require("./controllers/employee.controller");
 const app = express();
 
 app.use(express.json());
 
 app.post("/employee", createEmployee);
 
-app.get("/employee", (req, res) => {
-  res.status(200).json([]);
-});
+app.get("/employee", getAllEmployees);
 
 app.get("/employee/:id", (req, res) => {
   const id = Number(req.params.id);

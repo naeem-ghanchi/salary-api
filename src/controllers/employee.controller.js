@@ -17,3 +17,8 @@ exports.createEmployee = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.getAllEmployees = async (req, res) => {
+  const data = await service.getAll();
+  res.json(data);
+};
