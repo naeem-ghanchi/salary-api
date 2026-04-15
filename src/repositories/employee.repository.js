@@ -1,3 +1,4 @@
+const { fn, col } = require("sequelize");
 const Employee = require("../models/employee.model");
 
 exports.create = (data) => Employee.create(data);
@@ -19,4 +20,17 @@ exports.delete = async (id) => {
 
   await emp.destroy();
   return true;
+};
+
+exports.getCountryMetrics = async (country) => {
+  return Employee.findOne({
+    attributes: [
+      [fn("MIN", col("salary")), "min"],
+      [fn("MAX", col("salary")), "max"],
+      [fn("AVG", col("salary")), "avg"],
+      [fn("COUNT", col("id")), "count"],
+    ],
+    where: { country },
+    raw: true,
+  });
 };
