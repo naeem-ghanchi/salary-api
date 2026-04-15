@@ -33,4 +33,8 @@ app.get("/employee/:id", (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
+app.put("/employee/:id", (req, res) => {
+  res.status(200).json(req.body);
+});
+
 module.exports = app;
