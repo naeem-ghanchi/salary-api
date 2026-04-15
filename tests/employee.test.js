@@ -167,4 +167,9 @@ describe("Employee API", () => {
     const res = await request(app).get("/employee/999/salary");
     expect(res.statusCode).toBe(404);
   });
+
+  it("should return 400 for invalid id", async () => {
+    const res = await request(app).get("/employee/abc/salary");
+    expect(res.statusCode).toBe(400);
+  });
 });
