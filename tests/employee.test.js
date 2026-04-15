@@ -172,4 +172,27 @@ describe("Employee API", () => {
     const res = await request(app).get("/employee/abc/salary");
     expect(res.statusCode).toBe(400);
   });
+
+  it("should return salary metrics for a country", async () => {
+    await request(app).post("/employee").send({
+      fullName: "A",
+      jobTitle: "Dev",
+      country: "India",
+      salary: 100,
+    });
+
+    await request(app).post("/employee").send({
+      fullName: "B",
+      jobTitle: "Dev",
+      country: "India",
+      salary: 300,
+    });
+
+    const res = await request(app).get("/metrics/country/India");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.min).toBe(100);
+    expect(res.body.max).toBe(300);
+    expect(res.body.avg).toBe(200);
+  });
 });
