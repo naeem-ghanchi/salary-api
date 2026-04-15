@@ -39,3 +39,15 @@ exports.getEmployeeById = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.updateEmployee = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    const emp = await service.updateEmployee(id, req.body);
+
+    return res.status(200).json(emp);
+  } catch {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};

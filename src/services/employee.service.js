@@ -7,3 +7,5 @@ exports.createEmployee = async (data) => {
 exports.getAll = () => repo.findAll();
 
 exports.getById = (id) => repo.findById(id);
+
+exports.updateEmployee = (id, data) => repo.update(id, data);
