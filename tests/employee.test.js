@@ -251,4 +251,10 @@ describe("Employee API", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.pagination.page).toBe(1);
   });
+
+  it("should return empty data if no employees", async () => {
+    const res = await request(app).get("/employee?page=1&limit=10");
+
+    expect(res.body.data.length).toBe(0);
+  });
 });
