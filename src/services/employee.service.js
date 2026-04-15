@@ -5,3 +5,5 @@ exports.createEmployee = async (data) => {
 };
 
 exports.getAll = () => repo.findAll();
+
+exports.getById = (id) => repo.findById(id);

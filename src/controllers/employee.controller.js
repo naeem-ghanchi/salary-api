@@ -22,3 +22,14 @@ exports.getAllEmployees = async (req, res) => {
   const data = await service.getAll();
   res.json(data);
 };
+
+exports.getEmployeeById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    const emp = await service.getById(id);
+    return res.status(200).json(emp);
+  } catch (err) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
