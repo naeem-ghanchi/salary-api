@@ -195,4 +195,9 @@ describe("Employee API", () => {
     expect(res.body.max).toBe(300);
     expect(res.body.avg).toBe(200);
   });
+
+  it("should return 404 if no employees in country", async () => {
+    const res = await request(app).get("/metrics/country/Unknown");
+    expect(res.statusCode).toBe(404);
+  });
 });
