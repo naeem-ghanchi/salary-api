@@ -221,4 +221,9 @@ describe("Employee API", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.avg).toBe(200);
   });
+
+  it("should return 404 if no employees for job title", async () => {
+    const res = await request(app).get("/metrics/job/Unknown");
+    expect(res.statusCode).toBe(404);
+  });
 });
