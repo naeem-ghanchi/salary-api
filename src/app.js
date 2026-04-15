@@ -37,4 +37,8 @@ app.put("/employee/:id", (req, res) => {
   res.status(200).json(req.body);
 });
 
+app.delete("/employee/:id", (req, res) => {
+  res.status(200).json({ message: "Deleted" });
+});
+
 module.exports = app;
