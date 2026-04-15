@@ -5,6 +5,7 @@ const Employee = sequelize.define("Employee", {
   fullName: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   jobTitle: {
     type: DataTypes.STRING,
