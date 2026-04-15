@@ -200,4 +200,25 @@ describe("Employee API", () => {
     const res = await request(app).get("/metrics/country/Unknown");
     expect(res.statusCode).toBe(404);
   });
+
+  it("should return avg salary by job title", async () => {
+    await request(app).post("/employee").send({
+      fullName: "A",
+      jobTitle: "Dev",
+      country: "India",
+      salary: 100,
+    });
+
+    await request(app).post("/employee").send({
+      fullName: "B",
+      jobTitle: "Dev",
+      country: "US",
+      salary: 300,
+    });
+
+    const res = await request(app).get("/metrics/job/Dev");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.avg).toBe(200);
+  });
 });
