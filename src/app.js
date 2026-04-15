@@ -25,4 +25,9 @@ app.post("/employee", (req, res) => {
 app.get("/employee", (req, res) => {
   res.status(200).json([]);
 });
+
+app.get("/employee/:id", (req, res) => {
+  res.status(200).json({ id: req.params.id });
+});
+
 module.exports = app;
