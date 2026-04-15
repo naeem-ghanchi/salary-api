@@ -62,4 +62,12 @@ describe("Employee API", () => {
 
     expect(res.statusCode).toBe(404);
   });
+
+  it("should update employee", async () => {
+    const res = await request(app)
+      .put("/employee/1")
+      .send({ fullName: "Updated Name" });
+
+    expect(res.statusCode).toBe(200);
+  });
 });
