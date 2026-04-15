@@ -226,4 +226,24 @@ describe("Employee API", () => {
     const res = await request(app).get("/metrics/job/Unknown");
     expect(res.statusCode).toBe(404);
   });
+
+  it("should return paginated employees", async () => {
+    // create 15 employees
+    for (let i = 0; i < 15; i++) {
+      await request(app)
+        .post("/employee")
+        .send({
+          fullName: `User${i}`,
+          jobTitle: "Dev",
+          country: "India",
+          salary: 1000,
+        });
+    }
+
+    const res = await request(app).get("/employee?page=1&limit=10");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.data.length).toBe(10);
+    expect(res.body.pagination.total).toBe(15);
+  });
 });
